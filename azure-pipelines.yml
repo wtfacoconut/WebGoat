@@ -10,18 +10,18 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'clean install'
-    publishJUnitResults: false
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    mavenVersionOption: 'Default'
-    mavenOptions: '-Xmx3072m'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+#- task: Maven@3
+#  inputs:
+#    mavenPomFile: 'pom.xml'
+#    goals: 'clean install'
+#    publishJUnitResults: false
+#    javaHomeOption: 'JDKVersion'
+#    jdkVersionOption: '1.11'
+#    mavenVersionOption: 'Default'
+#    mavenOptions: '-Xmx3072m'
+#    mavenAuthenticateFeed: false
+#    effectivePomSkip: false
+#    sonarQubeRunAnalysis: false
 
 # Manual upload of source
 #- task: FortifyOnDemandStatic@5
@@ -37,14 +37,37 @@ steps:
 #    PolicyFailAction: '0'
 
 # FoD will pull code directly from source control
-- task: FortifyOnDemandStatic@5
+
+- task: InvokeRESTAPI@1
   inputs:
-    FortifyProjects: './'
-    BSIToken: 'eyJ0ZW5hbnRJZCI6NjgsInRlbmFudENvZGUiOiJGcmFua2xpbkJhbmsiLCJyZWxlYXNlSWQiOjI0ODA5NywicGF5bG9hZFR5cGUiOiJBTkFMWVNJU19QQVlMT0FEIiwiYXNzZXNzbWVudFR5cGVJZCI6Mjc0LCJ0ZWNobm9sb2d5VHlwZSI6IkpBVkEvSjJFRSIsInRlY2hub2xvZ3lUeXBlSWQiOjcsInRlY2hub2xvZ3lWZXJzaW9uIjoiMTEiLCJ0ZWNobm9sb2d5VmVyc2lvbklkIjoyMCwiYXVkaXRQcmVmZXJlbmNlIjoiQXV0b21hdGVkIiwiYXVkaXRQcmVmZXJlbmNlSWQiOjIsImluY2x1ZGVUaGlyZFBhcnR5IjpmYWxzZSwiaW5jbHVkZU9wZW5Tb3VyY2VBbmFseXNpcyI6ZmFsc2UsInBvcnRhbFVyaSI6Imh0dHBzOi8vYW1zLmZvcnRpZnkuY29tIiwiYXBpVXJpIjoiaHR0cHM6Ly9hcGkuYW1zLmZvcnRpZnkuY29tIiwic2NhblByZWZlcmVuY2UiOiJTdGFuZGFyZCIsInNjYW5QcmVmZXJlbmNlSWQiOjF9'
-    APIAuthenticationType: '1'
-    APIKey: '1d35fecb-fdc3-4c76-82c2-866d48d766b6'
-    APISecret: 'eXNERjVwNko0NlVWSmNUcXh9WG5gTjgiUm5jbXdn0'
-    EntitlementPreference: '0'
-    InProgressScanActionType: '0'
-    RemediationScanPreference: '0'
-    PolicyFailAction: '0'
+    connectionType: 'connectedServiceName'
+    serviceConnection: 'StartScanFromSourceControl'
+    method: 'POST'
+    headers: |
+      {
+      "Accept":"application/json", 
+      "Authorization": "Bearer gAAAAByInJJThPknb_yYE4KMTHZkqkCOzzHkhQrRBXFuP6iLCDwTf1hMkHDKxBpBr3VrOPNLv4SM9BpDTuO_nQVeTs64MEJ661xmSIojUxF1LkSSPe_7G4T2LU7IXemLiXVfZFADNks39X_27TCj3g0fGPnWrrOS7mjQ0ETXakFxjY4MtAEAAIAAAABakljuUjKtO_6dbtNHn1r06c912lxO3Tpw4JryyN3gJLFpSwSlvBjW5yLUPV5wNn_vHR7rTZOkvWRO3_90mw4TGDqDorYqniWISAn4e7qJdiHNHJoYDNFgBIzYl0xGvWIl81F4bWN-WKi27w2eWsuu11CPFycsn2TU2PqkIrqULK34r0EK5LpHN2BLejL0eBJwfijRVpBx3s3C5rjDX-eMjB1WGoOCc-xTQ7fHI2yEAFGAnHSUQiYZVRRn3gM7rrV9MZJQaAUZQquGaZaOonrSSA67TD29fU8tqoDx-gRwPoKqwUGnnk9JlSENsNE-bFaXZbCReAluE94pZ1yUdoLKmV0_ROTXQ_10sh-Rfkh2g0UrtgrjBtQ8N4qTWkEDDwYYznmZHUJWhNv9hK_5UQ5m_G3fGQxmNidRwJhwGOMQatfo0sAWgtmRdMLQoXgx2mL-IIgubTI-g0IBFn889agXtb-y29SfNo30mlwUC6zxttS7yv5HYZluS8PIfTOh9D91iJ92JUz4JihqwUjWfAUhrhd_cAd1s1YeGTA1hv8VNXhn8NMHTj2F6TzYfbWlZX0"
+      }
+    body: |
+      {
+      	"releaseId": 248097,
+      	"source": "develop",
+      	"model": {
+      		"IsBundledAssessment": false,
+      		"ParentAssessmentTypeId": 0,
+      		"EntitlementId": "8518",
+      		"EntitlementFrequency": 1,
+      		"Sonatype": false,
+      		"ExcludeThirdPartyLibs": true,
+      		"IsStatic": true,
+      		"Note": "Started from Azure DevOps",
+      		"Language": 20,
+      		"TechStack": 7,
+      		"IsRemediationScan": false,
+      		"AssessmentType": 274,
+      		"FPAudit": 2,
+      		"VersionId": 248097,
+      		"ProjectId": 125189
+      	}
+      }
+    waitForCompletion: 'false'
