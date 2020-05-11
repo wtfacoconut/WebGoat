@@ -23,6 +23,16 @@ steps:
 #    effectivePomSkip: false
 #    sonarQubeRunAnalysis: false
 
+# FoD will pull code directly from source control
+- task: CmdLine@2
+  inputs:
+    script: |
+      curl --request POST \
+      --header 'Content-Type: application/json' \
+      --header 'Authorization: Bearer gAAAAByInJJThPknb_yYE4KMTHZkqkCOzzHkhQrRBXFuP6iLCDwTf1hMkHDKxBpBr3VrOPNLv4SM9BpDTuO_nQVeTs64MEJ661xmSIojUxF1LkSSPe_7G4T2LU7IXemLiXVfZFADNks39X_27TCj3g0fGPnWrrOS7mjQ0ETXakFxjY4MtAEAAIAAAABakljuUjKtO_6dbtNHn1r06c912lxO3Tpw4JryyN3gJLFpSwSlvBjW5yLUPV5wNn_vHR7rTZOkvWRO3_90mw4TGDqDorYqniWISAn4e7qJdiHNHJoYDNFgBIzYl0xGvWIl81F4bWN-WKi27w2eWsuu11CPFycsn2TU2PqkIrqULK34r0EK5LpHN2BLejL0eBJwfijRVpBx3s3C5rjDX-eMjB1WGoOCc-xTQ7fHI2yEAFGAnHSUQiYZVRRn3gM7rrV9MZJQaAUZQquGaZaOonrSSA67TD29fU8tqoDx-gRwPoKqwUGnnk9JlSENsNE-bFaXZbCReAluE94pZ1yUdoLKmV0_ROTXQ_10sh-Rfkh2g0UrtgrjBtQ8N4qTWkEDDwYYznmZHUJWhNv9hK_5UQ5m_G3fGQxmNidRwJhwGOMQatfo0sAWgtmRdMLQoXgx2mL-IIgubTI-g0IBFn889agXtb-y29SfNo30mlwUC6zxttS7yv5HYZluS8PIfTOh9D91iJ92JUz4JihqwUjWfAUhrhd_cAd1s1YeGTA1hv8VNXhn8NMHTj2F6TzYfbWlZX0' \
+      --data '{"releaseId":248097,"source":"develop","model":{"IsBundledAssessment":false,"ParentAssessmentTypeId":0,"EntitlementId":"8518","EntitlementFrequency":1,"Sonatype":false,"ExcludeThirdPartyLibs":true,"IsStatic":true,"Note":"Started from Azure DevOps","Language":20,"TechStack":7,"IsRemediationScan":false,"AssessmentType":274,"FPAudit":2,"VersionId":248097,"ProjectId":125189}}' \
+      'https://ams.fortify.com/Releases/StartScanFromSourceControl'
+
 # Manual upload of source
 #- task: FortifyOnDemandStatic@5
 #  inputs:
@@ -35,39 +45,3 @@ steps:
 #    InProgressScanActionType: '0'
 #    RemediationScanPreference: '0'
 #    PolicyFailAction: '0'
-
-# FoD will pull code directly from source control
-
-- task: InvokeRESTAPI@1
-  inputs:
-    connectionType: 'connectedServiceName'
-    serviceConnection: 'StartScanFromSourceControl'
-    method: 'POST'
-    headers: |
-      {
-      "Accept":"application/json", 
-      "Authorization": "Bearer gAAAAByInJJThPknb_yYE4KMTHZkqkCOzzHkhQrRBXFuP6iLCDwTf1hMkHDKxBpBr3VrOPNLv4SM9BpDTuO_nQVeTs64MEJ661xmSIojUxF1LkSSPe_7G4T2LU7IXemLiXVfZFADNks39X_27TCj3g0fGPnWrrOS7mjQ0ETXakFxjY4MtAEAAIAAAABakljuUjKtO_6dbtNHn1r06c912lxO3Tpw4JryyN3gJLFpSwSlvBjW5yLUPV5wNn_vHR7rTZOkvWRO3_90mw4TGDqDorYqniWISAn4e7qJdiHNHJoYDNFgBIzYl0xGvWIl81F4bWN-WKi27w2eWsuu11CPFycsn2TU2PqkIrqULK34r0EK5LpHN2BLejL0eBJwfijRVpBx3s3C5rjDX-eMjB1WGoOCc-xTQ7fHI2yEAFGAnHSUQiYZVRRn3gM7rrV9MZJQaAUZQquGaZaOonrSSA67TD29fU8tqoDx-gRwPoKqwUGnnk9JlSENsNE-bFaXZbCReAluE94pZ1yUdoLKmV0_ROTXQ_10sh-Rfkh2g0UrtgrjBtQ8N4qTWkEDDwYYznmZHUJWhNv9hK_5UQ5m_G3fGQxmNidRwJhwGOMQatfo0sAWgtmRdMLQoXgx2mL-IIgubTI-g0IBFn889agXtb-y29SfNo30mlwUC6zxttS7yv5HYZluS8PIfTOh9D91iJ92JUz4JihqwUjWfAUhrhd_cAd1s1YeGTA1hv8VNXhn8NMHTj2F6TzYfbWlZX0"
-      }
-    body: |
-      {
-      	"releaseId": 248097,
-      	"source": "develop",
-      	"model": {
-      		"IsBundledAssessment": false,
-      		"ParentAssessmentTypeId": 0,
-      		"EntitlementId": "8518",
-      		"EntitlementFrequency": 1,
-      		"Sonatype": false,
-      		"ExcludeThirdPartyLibs": true,
-      		"IsStatic": true,
-      		"Note": "Started from Azure DevOps",
-      		"Language": 20,
-      		"TechStack": 7,
-      		"IsRemediationScan": false,
-      		"AssessmentType": 274,
-      		"FPAudit": 2,
-      		"VersionId": 248097,
-      		"ProjectId": 125189
-      	}
-      }
-    waitForCompletion: 'false'
