@@ -39,10 +39,9 @@ steps:
 - task: FortifyOnDemandStatic@6
   inputs:
     FortifyProjects: './'
-    FodConnection: 'FoD REST API Connection'
     ReleaseId: 248097
+    FodConnection: 'FoD Service Connection'
     EntitlementPreference: '0'
     InProgressScanActionType: '2'
     RemediationScanPreference: '0'
     PolicyFailAction: '0'
-
