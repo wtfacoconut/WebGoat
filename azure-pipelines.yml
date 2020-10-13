@@ -10,23 +10,37 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'clean install'
-    publishJUnitResults: false
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    mavenVersionOption: 'Default'
-    mavenOptions: '-Xmx3072m'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+#- task: Maven@3
+#  inputs:
+#    mavenPomFile: 'pom.xml'
+#    goals: 'clean install'
+#    publishJUnitResults: false
+#    javaHomeOption: 'JDKVersion'
+#    jdkVersionOption: '1.11'
+#    mavenVersionOption: 'Default'
+#    mavenOptions: '-Xmx3072m'
+#    mavenAuthenticateFeed: false
+#    effectivePomSkip: false
+#    sonarQubeRunAnalysis: false
+
+#- task: FortifyOnDemandStatic@6
+#  inputs:
+#    FortifyProjects: './'
+#    APIUrl: 'https://api.ams.fortify.com'
+#    ReleaseId: 248097
+#    APIAuthenticationType: '1'
+#    APIKey: '1d35fecb-fdc3-4c76-82c2-866d48d766b6'
+#    APISecret: 'eXNERjVwNko0NlVWSmNUcXh9WG5gTjgiUm5jbXdn0'
+#    EntitlementPreference: '0'
+#    InProgressScanActionType: '2'
+#    RemediationScanPreference: '0'
+#    PolicyFailAction: '0'
 
 - task: FortifyOnDemandStatic@6
   inputs:
     FortifyProjects: './'
     APIUrl: 'https://api.ams.fortify.com'
+    FodConnection: 'https://api.ams.fortify.com'
     ReleaseId: 248097
     APIAuthenticationType: '1'
     APIKey: '1d35fecb-fdc3-4c76-82c2-866d48d766b6'
