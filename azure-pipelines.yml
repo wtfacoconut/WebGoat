@@ -24,3 +24,21 @@ steps:
     sonarQubeRunAnalysis: false
 
 
+
+- task: FortifyOnDemandStatic@6
+  inputs:
+    FortifyProjects: './'
+    ReleaseId: 248097
+    InProgressScanActionType: '2'
+    RemediationScanPreference: '0'
+    PolicyFailAction: '0'
+
+- task: FortifyOnDemandStatic@6
+  inputs:
+    FortifyProjects: './'
+    ReleaseId: 248097
+    BSIToken: 'eyJ0ZW5hbnRJZCI6NjgsInRlbmFudENvZGUiOiJGcmFua2xpbkJhbmsiLCJyZWxlYXNlSWQiOjI0ODA5NywicGF5bG9hZFR5cGUiOiJBTkFMWVNJU19QQVlMT0FEIiwiYXNzZXNzbWVudFR5cGVJZCI6Mjc0LCJ0ZWNobm9sb2d5VHlwZSI6IkpBVkEvSjJFRSIsInRlY2hub2xvZ3lUeXBlSWQiOjcsInRlY2hub2xvZ3lWZXJzaW9uIjoiMS44IiwidGVjaG5vbG9neVZlcnNpb25JZCI6MTIsImF1ZGl0UHJlZmVyZW5jZSI6IkF1dG9tYXRlZCIsImF1ZGl0UHJlZmVyZW5jZUlkIjoyLCJpbmNsdWRlVGhpcmRQYXJ0eSI6ZmFsc2UsImluY2x1ZGVPcGVuU291cmNlQW5hbHlzaXMiOmZhbHNlLCJwb3J0YWxVcmkiOiJodHRwczovL2Ftcy5mb3J0aWZ5LmNvbSIsImFwaVVyaSI6Imh0dHBzOi8vYXBpLmFtcy5mb3J0aWZ5LmNvbSIsInNjYW5QcmVmZXJlbmNlIjoiU3RhbmRhcmQiLCJzY2FuUHJlZmVyZW5jZUlkIjoxfQ'
+    EntitlementPreference: '0'
+    InProgressScanActionType: '2'
+    RemediationScanPreference: '0'
+    PolicyFailAction: '0'
