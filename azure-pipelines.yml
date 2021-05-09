@@ -24,15 +24,15 @@ steps:
 #    effectivePomSkip: false
 #    sonarQubeRunAnalysis: false
 
-- task: FortifyOnDemandStatic@6
-  inputs:
-    FortifyProjects: './'
-    ReleaseId: 248097
-    FodConnection: 'FoD Service Connection'
-    EntitlementPreference: '0'
-    InProgressScanActionType: '2'
-    RemediationScanPreference: '0'
-    PolicyFailAction: '0'
+# - task: FortifyOnDemandStatic@6
+#   inputs:
+#     FortifyProjects: './'
+#     ReleaseId: 248097
+#     FodConnection: 'FoD Service Connection'
+#     EntitlementPreference: '0'
+#     InProgressScanActionType: '2'
+#     RemediationScanPreference: '0'
+#     PolicyFailAction: '0'
 
 - task: CmdLine@2
   inputs:
