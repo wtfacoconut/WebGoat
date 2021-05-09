@@ -40,4 +40,4 @@ steps:
       echo "SC Client Secret: $(ScSecret)"
       echo "SC Client Secret: $(SscCiToken)"
       ls -lh
-  env: {ScanCentral.ClientToken: ScSecret, ScanCentral.SscCiToken: SscCiToken }
+  env: {ScanCentral.ClientToken: $(ScanCentral.ClientToken), ScanCentral.SscCiToken: $(ScanCentral.SscCiToken) }
