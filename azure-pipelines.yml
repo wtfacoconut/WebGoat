@@ -10,6 +10,10 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  - name: tv1
+    value: tv1SuperSecretVal
+
 steps:
 #- task: Maven@3
 #  inputs:
@@ -33,10 +37,6 @@ steps:
 #     InProgressScanActionType: '2'
 #     RemediationScanPreference: '0'
 #     PolicyFailAction: '0'
-
-variables:
-  - name: tv1
-    value: asdf
 
 - task: CmdLine@2
   inputs:
