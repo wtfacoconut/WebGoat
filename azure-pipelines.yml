@@ -33,3 +33,11 @@ steps:
     InProgressScanActionType: '2'
     RemediationScanPreference: '0'
     PolicyFailAction: '0'
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo "SC Client Secret: $(ScSecret)"
+      echo "SC Client Secret: $(SscCiToken)"
+      ls -lh
+  env: {ScanCentral.ClientToken: ScSecret, ScanCentral.SscCiToken: SscCiToken }
