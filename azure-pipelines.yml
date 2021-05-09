@@ -34,10 +34,16 @@ steps:
 #     RemediationScanPreference: '0'
 #     PolicyFailAction: '0'
 
+variables:
+  - name: tv1
+    value: asdf
+
 - task: CmdLine@2
   inputs:
     script: |
-      echo "SC Client Secret: $(ScSecret)"
-      echo "SC Client Secret: $(SscCiToken)"
+      echo "SC Client Secret: $(ScanCentral.ClientToken)"
+      echo "SSC Token: " $(ScanCentral.SscCiToken)
+      echo "Test var 1: $(tv1)"
+      echo "Test var 1: " $(tv1)
       ls -lh
   env: {ScanCentral.ClientToken: $(ScanCentral.ClientToken), ScanCentral.SscCiToken: $(ScanCentral.SscCiToken) }
